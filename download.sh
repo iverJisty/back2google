@@ -7,7 +7,7 @@ if [ $# -eq 2 ]; then
 fi
 
 if [ $# -ge 1 ]; then
-    ./gdrive list | grep $1.xz.enc | cut -d ' ' -f 1 | xargs ./gdrive download --stdout | pv | openssl aes-256-cbc -d -k $key | xzcat | zfs recv $1
+    ./gdrive list | grep $1.xz.enc | cut -d ' ' -f 1 | xargs ./gdrive download --stdout | pv | openssl aes-256-cbc -d -k $key | xzcat | sudo zfs recv $1
 else
     echo "Usage : ./download.sh [snapshot] [key]"
     echo "Get $# arguments .. need more than one"
